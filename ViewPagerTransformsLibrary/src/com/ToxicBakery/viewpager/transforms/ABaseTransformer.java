@@ -20,6 +20,12 @@ public abstract class ABaseTransformer implements PageTransformer {
 		postTransform(view, position);
 	}
 
+	/**
+	 * If the position offset of a fragment is less than negative one or greater than one, returning true will set the
+	 * visibility of the fragment to {@link View#GONE}. Returning false will force the fragment to {@link View#VISIBLE}.
+	 * 
+	 * @return
+	 */
 	protected boolean hideOffscreenPages() {
 		return true;
 	}
@@ -34,7 +40,7 @@ public abstract class ABaseTransformer implements PageTransformer {
 	}
 
 	/**
-	 * Called each {@link #transformPage(View, float)} before {{@link #onTransform(View, float)} is called. screen.
+	 * Called each {@link #transformPage(View, float)} before {{@link #onTransform(View, float)} is called.
 	 * 
 	 * @param view
 	 * @param position
@@ -52,9 +58,8 @@ public abstract class ABaseTransformer implements PageTransformer {
 		view.setPivotY(0);
 		view.setTranslationY(0);
 
-		// Remove the default paging
 		if (isPagingEnabled()) {
-			view.setTranslationX((width * position * 0.5f));
+			view.setTranslationX(width * position * 0.5f);
 		} else {
 			view.setTranslationX(-width * position);
 		}
