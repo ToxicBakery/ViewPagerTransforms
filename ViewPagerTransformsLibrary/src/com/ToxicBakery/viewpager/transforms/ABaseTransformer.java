@@ -15,9 +15,9 @@ public abstract class ABaseTransformer implements PageTransformer {
 
 	@Override
 	public void transformPage(View view, float position) {
-		preTransform(view, position);
+		onPreTransform(view, position);
 		onTransform(view, position);
-		postTransform(view, position);
+		onPostTransform(view, position);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public abstract class ABaseTransformer implements PageTransformer {
 	 * @param view
 	 * @param position
 	 */
-	protected void preTransform(View view, float position) {
+	protected void onPreTransform(View view, float position) {
 		final float width = view.getWidth();
 
 		view.setAlpha(1);
@@ -77,7 +77,7 @@ public abstract class ABaseTransformer implements PageTransformer {
 	 * @param view
 	 * @param position
 	 */
-	protected void postTransform(View view, float position) {
+	protected void onPostTransform(View view, float position) {
 	}
 
 }
