@@ -56,6 +56,9 @@ public class MainActivity extends Activity implements OnNavigationListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		if (savedInstanceState != null)
+			mSelectedItem = savedInstanceState.getInt(KEY_SELECTED_CLASS);
 
 		final ArrayAdapter<TransformerItem> actionBarAdapter = new ArrayAdapter<>(getApplicationContext(),
 				android.R.layout.simple_list_item_1, android.R.id.text1, TRANSFORM_CLASSES);
@@ -71,10 +74,8 @@ public class MainActivity extends Activity implements OnNavigationListener {
 
 		mPager = (ViewPager) findViewById(R.id.container);
 		mPager.setAdapter(mAdapter);
-
-		if (savedInstanceState != null)
-			mSelectedItem = savedInstanceState.getInt(KEY_SELECTED_CLASS);
-
+		
+		actionBar.setSelectedNavigationItem(mSelectedItem);
 	}
 
 	@Override
