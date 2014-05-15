@@ -58,11 +58,8 @@ public abstract class ABaseTransformer implements PageTransformer {
 		view.setPivotY(0);
 		view.setTranslationY(0);
 
-		if (isPagingEnabled()) {
-			view.setTranslationX(width * position * 0.5f);
-		} else {
+		if (!isPagingEnabled())
 			view.setTranslationX(-width * position);
-		}
 
 		if (hideOffscreenPages()) {
 			view.setVisibility(position < -1f || position > 1f ? View.GONE : View.VISIBLE);
