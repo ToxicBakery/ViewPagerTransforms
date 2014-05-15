@@ -48,7 +48,6 @@ public abstract class ABaseTransformer implements PageTransformer {
 	protected void onPreTransform(View view, float position) {
 		final float width = view.getWidth();
 
-		view.setAlpha(1);
 		view.setRotationX(0);
 		view.setRotationY(0);
 		view.setRotation(0);
@@ -58,13 +57,14 @@ public abstract class ABaseTransformer implements PageTransformer {
 		view.setPivotY(0);
 		view.setTranslationY(0);
 
-		if (!isPagingEnabled())
+		if (!isPagingEnabled()) {
 			view.setTranslationX(-width * position);
+		}
 
 		if (hideOffscreenPages()) {
-			view.setVisibility(position < -1f || position > 1f ? View.GONE : View.VISIBLE);
+			view.setAlpha(position <= -1f || position >= 1f ? 0f : 1f);
 		} else {
-			view.setVisibility(View.VISIBLE);
+			view.setAlpha(1f);
 		}
 	}
 
