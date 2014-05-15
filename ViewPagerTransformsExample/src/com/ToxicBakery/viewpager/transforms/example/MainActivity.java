@@ -18,11 +18,13 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.ToxicBakery.viewpager.transforms.BackgroundToForegroundTransformer;
 import com.ToxicBakery.viewpager.transforms.CubeInTransformer;
 import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
 import com.ToxicBakery.viewpager.transforms.FlipHorizontalTransformer;
 import com.ToxicBakery.viewpager.transforms.FlipVerticalTransformer;
+import com.ToxicBakery.viewpager.transforms.ForegroundToBackgroundTransformer;
 import com.ToxicBakery.viewpager.transforms.RotateDownTransformer;
 import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
 import com.ToxicBakery.viewpager.transforms.TabletTransformer;
@@ -39,6 +41,8 @@ public class MainActivity extends Activity implements OnNavigationListener {
 		TRANSFORM_CLASSES = new ArrayList<>();
 		TRANSFORM_CLASSES.add(new TransformerItem(DefaultTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(AccordionTransformer.class));
+		TRANSFORM_CLASSES.add(new TransformerItem(BackgroundToForegroundTransformer.class));
+		TRANSFORM_CLASSES.add(new TransformerItem(ForegroundToBackgroundTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(CubeInTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(CubeOutTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(FlipHorizontalTransformer.class));
