@@ -16,7 +16,7 @@ pager.setAdapter(mAdapter);
 pager.setPageTransformer(new RotateUpTransformer());
 ```
 
-#Extending Animations
+#Creating Custom Transforms
 
 All ViewPagerTransform implementations extend [ABaseTransformer](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/ViewPagerTransformsLibrary/src/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java) providing useful hooks improving readability of animations and basic functionality important when switching between animations. [ABaseTransformer](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/ViewPagerTransformsLibrary/src/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java) provides three lifecycle hooks and two flags for default handling of hiding offscreen fragments and mimicing the default paging functionality of the ViewPager.
 
