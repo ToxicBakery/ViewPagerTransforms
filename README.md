@@ -3,6 +3,8 @@ ViewPagerTransforms
 
 Library containing common animations needed for transforming ViewPager scrolling on Android v13+. This library is a rewrite of the [JazzyViewPager](https://github.com/jfeinstein10/JazzyViewPager) library and owes credit of the animation concepts directly to its source. The purpose of this rewrite is to provide an easier to use and extend implementation of ViewPager animations.
 
+![Demo](http://i.imgur.com/rvhE2ns.gif)
+
 #Getting Started
 
 Simply import this project into your IDE and reference the Library as an Android Library Project from your project. After configuration, instantiate the transformer animation you wish to use and set it as the [page transformer](http://developer.android.com/reference/android/support/v4/view/ViewPager.html#setPageTransformer(boolean, android.support.v4.view.ViewPager.PageTransformer)).
