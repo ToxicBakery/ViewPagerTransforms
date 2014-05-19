@@ -13,7 +13,7 @@ Simply import this project into your IDE and reference the Library as an Android
 // Reference (or instantiate) a ViewPager instance and apply a transformer
 pager = (ViewPager) findViewById(R.id.container);
 pager.setAdapter(mAdapter);
-pager.setPageTransformer(new RotateUpTransformer());
+pager.setPageTransformer(true, new RotateUpTransformer());
 ```
 
 #Creating Custom Transforms
