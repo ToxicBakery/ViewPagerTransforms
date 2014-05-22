@@ -22,6 +22,7 @@ import com.ToxicBakery.viewpager.transforms.BackgroundToForegroundTransformer;
 import com.ToxicBakery.viewpager.transforms.CubeInTransformer;
 import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
+import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
 import com.ToxicBakery.viewpager.transforms.FlipHorizontalTransformer;
 import com.ToxicBakery.viewpager.transforms.FlipVerticalTransformer;
 import com.ToxicBakery.viewpager.transforms.ForegroundToBackgroundTransformer;
@@ -43,6 +44,7 @@ public class MainActivity extends Activity implements OnNavigationListener {
 		TRANSFORM_CLASSES.add(new TransformerItem(DefaultTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(AccordionTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(BackgroundToForegroundTransformer.class));
+		TRANSFORM_CLASSES.add(new TransformerItem(DepthPageTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(ForegroundToBackgroundTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(CubeInTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(CubeOutTransformer.class));
