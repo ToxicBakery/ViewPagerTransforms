@@ -12,6 +12,9 @@ public class ZoomOutTranformer extends ABaseTransformer {
 		view.setPivotX(view.getWidth() * 0.5f);
 		view.setPivotY(view.getHeight() * 0.5f);
 		view.setAlpha(position < -1f || position > 1f ? 0f : 1f - (scale - 1f));
+		if(position == -1){
+			view.setTranslationX(view.getWidth() * -1);
+		}
 	}
 
 }
