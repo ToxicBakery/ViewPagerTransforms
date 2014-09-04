@@ -17,8 +17,4 @@ public class ForegroundToBackgroundTransformer extends ABaseTransformer {
 		view.setTranslationX(position > 0 ? width * position : -width * position * 0.25f);
 	}
 
-	private static final float min(float val, float min) {
-		return val < min ? min : val;
-	}
-
 }

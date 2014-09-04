@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppBaseTheme" parent="android:Theme.Holo">
+        <item name="android:windowBackground">@android:color/background_light</item>
+        <item name="android:actionBarStyle">@style/DarkActionBar</item>
+    </style>
+
+    <style name="DarkActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@android:color/background_dark</item>
+    </style>
+
+</resources>

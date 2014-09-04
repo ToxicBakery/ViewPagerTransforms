@@ -41,23 +41,23 @@ public class MainActivity extends Activity implements OnNavigationListener {
 	private static final ArrayList<TransformerItem> TRANSFORM_CLASSES;
 
 	static {
-		TRANSFORM_CLASSES = new ArrayList<>();
+		TRANSFORM_CLASSES = new ArrayList<TransformerItem>();
 		TRANSFORM_CLASSES.add(new TransformerItem(DefaultTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(AccordionTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(BackgroundToForegroundTransformer.class));
-		TRANSFORM_CLASSES.add(new TransformerItem(DepthPageTransformer.class));
-		TRANSFORM_CLASSES.add(new TransformerItem(ForegroundToBackgroundTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(CubeInTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(CubeOutTransformer.class));
+		TRANSFORM_CLASSES.add(new TransformerItem(DepthPageTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(FlipHorizontalTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(FlipVerticalTransformer.class));
+		TRANSFORM_CLASSES.add(new TransformerItem(ForegroundToBackgroundTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(RotateDownTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(RotateUpTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(StackTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(TabletTransformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(ZoomInTransformer.class));
-		TRANSFORM_CLASSES.add(new TransformerItem(ZoomOutTranformer.class));
 		TRANSFORM_CLASSES.add(new TransformerItem(ZoomOutSlideTransformer.class));
+		TRANSFORM_CLASSES.add(new TransformerItem(ZoomOutTranformer.class));
 	}
 
 	private int mSelectedItem;
@@ -74,8 +74,8 @@ public class MainActivity extends Activity implements OnNavigationListener {
 			selectedPage = savedInstanceState.getInt(KEY_SELECTED_PAGE);
 		}
 
-		final ArrayAdapter<TransformerItem> actionBarAdapter = new ArrayAdapter<>(getApplicationContext(),
-				android.R.layout.simple_list_item_1, android.R.id.text1, TRANSFORM_CLASSES);
+		final ArrayAdapter<TransformerItem> actionBarAdapter = new ArrayAdapter<TransformerItem>(
+				getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, TRANSFORM_CLASSES);
 
 		final ActionBar actionBar = getActionBar();
 		actionBar.setListNavigationCallbacks(actionBarAdapter, this);
