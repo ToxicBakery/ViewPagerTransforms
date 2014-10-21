@@ -14,26 +14,23 @@
  * limitations under the License.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package com.ToxicBakery.viewpager.transforms;
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.0'
+import android.view.View;
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
+public class ForegroundToBackgroundTransformer extends ABaseTransformer {
 
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
+	@Override
+	protected void onTransform(View view, float position) {
+		final float height = view.getHeight();
+		final float width = view.getWidth();
+		final float scale = min(position > 0 ? 1f : Math.abs(1f + position), 0.5f);
 
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
+		view.setScaleX(scale);
+		view.setScaleY(scale);
+		view.setPivotX(width * 0.5f);
+		view.setPivotY(height * 0.5f);
+		view.setTranslationX(position > 0 ? width * position : -width * position * 0.25f);
+	}
+
 }

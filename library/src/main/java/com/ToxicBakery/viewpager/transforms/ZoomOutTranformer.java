@@ -14,26 +14,23 @@
  * limitations under the License.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package com.ToxicBakery.viewpager.transforms;
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.0'
+import android.view.View;
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
+public class ZoomOutTranformer extends ABaseTransformer {
 
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
+	@Override
+	protected void onTransform(View view, float position) {
+		final float scale = 1f + Math.abs(position);
+		view.setScaleX(scale);
+		view.setScaleY(scale);
+		view.setPivotX(view.getWidth() * 0.5f);
+		view.setPivotY(view.getHeight() * 0.5f);
+		view.setAlpha(position < -1f || position > 1f ? 0f : 1f - (scale - 1f));
+		if(position == -1){
+			view.setTranslationX(view.getWidth() * -1);
+		}
+	}
 
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
 }

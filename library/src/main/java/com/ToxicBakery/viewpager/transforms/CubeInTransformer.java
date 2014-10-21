@@ -14,26 +14,23 @@
  * limitations under the License.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package com.ToxicBakery.viewpager.transforms;
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.0'
+import android.view.View;
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
+public class CubeInTransformer extends ABaseTransformer {
 
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
+	@Override
+	protected void onTransform(View view, float position) {
+		// Rotate the fragment on the left or right edge
+		view.setPivotX(position > 0 ? 0 : view.getWidth());
+		view.setPivotY(0);
+		view.setRotationY(-90f * position);
+	}
 
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
+	@Override
+	public boolean isPagingEnabled() {
+		return true;
+	}
+
 }

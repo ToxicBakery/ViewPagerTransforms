@@ -14,26 +14,28 @@
  * limitations under the License.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package com.ToxicBakery.viewpager.transforms;
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.0'
+import android.view.View;
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
+public class RotateDownTransformer extends ABaseTransformer {
 
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
+	private static final float ROT_MOD = -15f;
 
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
+	@Override
+	protected void onTransform(View view, float position) {
+		final float width = view.getWidth();
+		final float height = view.getHeight();
+		final float rotation = ROT_MOD * position * -1.25f;
+
+		view.setPivotX(width * 0.5f);
+		view.setPivotY(height);
+		view.setRotation(rotation);
+	}
+	
+	@Override
+	protected boolean isPagingEnabled() {
+		return true;
+	}
+
 }
