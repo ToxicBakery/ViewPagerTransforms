@@ -34,6 +34,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.ToxicBakery.viewpager.transforms.AwesomeTransformer;
 import com.ToxicBakery.viewpager.transforms.BackgroundToForegroundTransformer;
 import com.ToxicBakery.viewpager.transforms.CubeInTransformer;
 import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
@@ -59,6 +60,7 @@ public class MainActivity extends Activity implements OnNavigationListener {
 
     static {
         TRANSFORM_CLASSES = new ArrayList<TransformerItem>();
+        TRANSFORM_CLASSES.add(new TransformerItem(AwesomeTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(DefaultTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(AccordionTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(BackgroundToForegroundTransformer.class));
