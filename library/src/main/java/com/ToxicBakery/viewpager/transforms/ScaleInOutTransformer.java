@@ -2,7 +2,7 @@ package com.ToxicBakery.viewpager.transforms;
 
 import android.view.View;
 
-public class AwesomeTransformer extends ABaseTransformer {
+public class ScaleInOutTransformer extends ABaseTransformer {
 
 	@Override
 	protected void onTransform(View view, float position) {
