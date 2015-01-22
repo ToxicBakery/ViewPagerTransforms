@@ -44,6 +44,7 @@ import com.ToxicBakery.viewpager.transforms.FlipVerticalTransformer;
 import com.ToxicBakery.viewpager.transforms.ForegroundToBackgroundTransformer;
 import com.ToxicBakery.viewpager.transforms.RotateDownTransformer;
 import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
+import com.ToxicBakery.viewpager.transforms.ScaleInOutTransformer;
 import com.ToxicBakery.viewpager.transforms.StackTransformer;
 import com.ToxicBakery.viewpager.transforms.TabletTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
@@ -70,7 +71,8 @@ public class MainActivity extends Activity implements OnNavigationListener {
         TRANSFORM_CLASSES.add(new TransformerItem(ForegroundToBackgroundTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(RotateDownTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(RotateUpTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(StackTransformer.class));
+	    TRANSFORM_CLASSES.add(new TransformerItem(ScaleInOutTransformer.class));
+	    TRANSFORM_CLASSES.add(new TransformerItem(StackTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(TabletTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(ZoomInTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(ZoomOutSlideTransformer.class));
