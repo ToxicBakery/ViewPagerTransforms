@@ -23,6 +23,9 @@ repositories {
     maven {
         url "https://oss.sonatype.org/content/repositories/releases"
     }
+    maven {
+        url "https://oss.sonatype.org/content/repositories/staging"
+    }
 }
 
 android {
@@ -47,4 +50,5 @@ android {
 dependencies {
     compile 'com.android.support:support-v13:20.0.0'
     compile project(':library')
+    //compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.1.0@aar'
 }

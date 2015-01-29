@@ -9,7 +9,7 @@ Library containing common animations needed for transforming ViewPager scrolling
 
 Add gradle dependency to your application.
 ```gradle
-compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.0.0@aar'
+compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.1.0@aar'
 ```
 
 After configuration, instantiate the transformer animation you wish to use and set it as the [page transformer](http://developer.android.com/reference/android/support/v4/view/ViewPager.html#setPageTransformer(boolean, android.support.v4.view.ViewPager.PageTransformer)).
