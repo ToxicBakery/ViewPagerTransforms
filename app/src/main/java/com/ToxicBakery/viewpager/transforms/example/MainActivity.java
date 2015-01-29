@@ -49,7 +49,6 @@ import com.ToxicBakery.viewpager.transforms.TabletTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
-import com.ToxicBakery.viewpager.transforms.example.R;
 
 public class MainActivity extends Activity implements OnNavigationListener {
 
@@ -58,7 +57,7 @@ public class MainActivity extends Activity implements OnNavigationListener {
     private static final ArrayList<TransformerItem> TRANSFORM_CLASSES;
 
     static {
-        TRANSFORM_CLASSES = new ArrayList<TransformerItem>();
+        TRANSFORM_CLASSES = new ArrayList<>();
         TRANSFORM_CLASSES.add(new TransformerItem(DefaultTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(AccordionTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(BackgroundToForegroundTransformer.class));
@@ -81,6 +80,7 @@ public class MainActivity extends Activity implements OnNavigationListener {
     private ViewPager mPager;
     private PageAdapter mAdapter;
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,13 +94,6 @@ public class MainActivity extends Activity implements OnNavigationListener {
         final ArrayAdapter<TransformerItem> actionBarAdapter = new ArrayAdapter<TransformerItem>(
                 getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, TRANSFORM_CLASSES);
 
-        final ActionBar actionBar = getActionBar();
-        actionBar.setListNavigationCallbacks(actionBarAdapter, this);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-
-        //noinspection ResourceType
-        actionBar.setDisplayOptions(actionBar.getDisplayOptions() ^ ActionBar.DISPLAY_SHOW_TITLE);
-
         setContentView(R.layout.activity_main);
 
         mAdapter = new PageAdapter(getFragmentManager());
@@ -109,7 +102,17 @@ public class MainActivity extends Activity implements OnNavigationListener {
         mPager.setAdapter(mAdapter);
         mPager.setCurrentItem(selectedPage);
 
-        actionBar.setSelectedNavigationItem(mSelectedItem);
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setListNavigationCallbacks(actionBarAdapter, this);
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+
+            //noinspection ResourceType
+            actionBar.setDisplayOptions(actionBar.getDisplayOptions() ^ ActionBar.DISPLAY_SHOW_TITLE);
+
+            actionBar.setSelectedNavigationItem(mSelectedItem);
+        }
+
     }
 
     @Override

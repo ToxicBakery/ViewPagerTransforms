@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2014 Toxic Bakery
  *
@@ -15,23 +16,21 @@
  */
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
 apply plugin: 'signing'
 
-group = 'com.ToxicBakery.viewpager.transforms'
+group = GROUP
 version = VERSION_NAME
-if (version.endsWith('-SNAPSHOT')) {
-    status = 'integration'
-} else {
+if (isReleaseBuild()) {
     status = 'release'
+} else {
+    status = 'integration'
 }
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.0"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.ToxicBakery.viewpager.transforms"
         minSdkVersion 13
         targetSdkVersion 21
         versionCode 1
@@ -44,7 +43,7 @@ android {
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
