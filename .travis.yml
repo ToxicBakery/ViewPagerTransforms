@@ -1,0 +1,31 @@
+language: android
+
+sudo: false
+
+before_install:
+    - openssl aes-256-cbc -K $encrypted_8d60cabe1821_key -iv $encrypted_8d60cabe1821_iv -in maven.keystore.gpg.enc -out maven.keystore.gpg -d
+    - chmod +x gradlew
+
+jdk:
+    - oraclejdk7
+
+android:
+  components:
+    - build-tools-22.0.1
+    - android-22
+
+    # Additional Components
+    - extra
+
+script:
+    - echo "Travis branch is $TRAVIS_BRANCH"
+    - echo "Travis branch is in pull request? $TRAVIS_PULL_REQUEST"
+    - echo "Travis tag $TRAVIS_TAG"
+    - gradle clean assemble test uploadArchives --continue
+
+install:
+    - true
+
+notifications:
+  email:
+    - toxicbakery@gmail.com

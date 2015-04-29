@@ -17,7 +17,6 @@
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-def mavenUrl
 if (isReleaseBuild()) {
     println 'RELEASE BUILD'
 } else {
@@ -25,11 +24,11 @@ if (isReleaseBuild()) {
 }
 
 def getRepositoryUsername() {
-    return hasProperty('sonatype_user') ? sonatype_user : ""
+    return System.getenv('sonatype_user') ?: hasProperty('sonatype_user') ? sonatype_user : ""
 }
 
 def getRepositoryPassword() {
-    return hasProperty('sonatype_pass') ? sonatype_pass : ""
+    return System.getenv('sonatype_pass') ?: hasProperty('sonatype_pass') ? sonatype_pass : ""
 }
 
 afterEvaluate { project ->
@@ -44,7 +43,7 @@ afterEvaluate { project ->
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
 
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                snapshotRepository(url: isTravis() ? "https://oss.sonatype.org/content/repositories/snapshots" : mavenLocal().url) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
 
