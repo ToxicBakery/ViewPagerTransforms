@@ -52,13 +52,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
-            // Update the signing information with the secure keys stored in Travis
-            if (System.getenv('signing_keyId') && System.getenv('signing_password')) {
-                ext."signing.keyId" = System.getenv('signing_keyId')
-                ext."signing.password" = System.getenv('signing_password')
-                ext."signing.secretKeyRingFile" = "./maven.keystore.gpg"
-            }
         }
     }
 }
