@@ -21,6 +21,9 @@ script:
     - echo "Travis branch is $TRAVIS_BRANCH"
     - echo "Travis branch is in pull request? $TRAVIS_PULL_REQUEST"
     - echo "Travis tag $TRAVIS_TAG"
+    - echo -e "signing.keyId=${signing_keyId}" >> "gradle.properties"
+    - echo -e "signing.password=${signing_password}" >> "gradle.properties"
+    - echo -e "signing.secretKeyRingFile=../maven.keystore.gpg" >> "gradle.properties"
     - gradle clean assemble test uploadArchives --continue
 
 install:

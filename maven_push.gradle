@@ -31,7 +31,20 @@ def getRepositoryPassword() {
     return System.getenv('sonatype_pass') ?: hasProperty('sonatype_pass') ? sonatype_pass : ""
 }
 
+String getBranchName() {
+    return System.getenv('TRAVIS_BRANCH')
+}
+
 afterEvaluate { project ->
+
+    println "Is Tag ${isTag()}"
+    println "Branch ${getBranchName()}"
+    println "Is Release ${isReleaseBuild()}"
+    println "Is Travis ${isTravis()}"
+    println "Has Username ${!getRepositoryUsername().empty}"
+    println "Has Password ${!getRepositoryPassword().empty}"
+    println "Determined Version ${version}"
+
     uploadArchives {
         repositories {
             mavenDeployer {
