@@ -50,5 +50,4 @@ android {
 dependencies {
     compile 'com.android.support:support-v13:22.1.1'
     compile project(':library')
-    //compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.1.0@aar'
 }

@@ -35,7 +35,11 @@ allprojects {
 }
 
 def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
+    return isTag() && !isSnapshot()
+}
+
+def isSnapshot() {
+    return version.contains("SNAPSHOT")
 }
 
 boolean isTravis() {
