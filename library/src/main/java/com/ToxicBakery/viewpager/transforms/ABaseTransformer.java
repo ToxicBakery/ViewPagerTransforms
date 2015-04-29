@@ -97,7 +97,9 @@ public abstract class ABaseTransformer implements PageTransformer {
 
 		if (hideOffscreenPages()) {
 			page.setAlpha(position <= -1f || position >= 1f ? 0f : 1f);
+			page.setEnabled(false);
 		} else {
+			page.setEnabled(true);
 			page.setAlpha(1f);
 		}
 	}
