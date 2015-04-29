@@ -17,7 +17,6 @@
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-def mavenUrl
 if (isReleaseBuild()) {
     println 'RELEASE BUILD'
 } else {
@@ -44,7 +43,7 @@ afterEvaluate { project ->
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
 
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                snapshotRepository(url: isTravis() ? "https://oss.sonatype.org/content/repositories/snapshots" : mavenLocal().url) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
 
