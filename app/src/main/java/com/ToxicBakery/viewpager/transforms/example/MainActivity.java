@@ -16,71 +16,33 @@
 
 package com.ToxicBakery.viewpager.transforms.example;
 
-import java.util.ArrayList;
-
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.PageTransformer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
-import com.ToxicBakery.viewpager.transforms.BackgroundToForegroundTransformer;
-import com.ToxicBakery.viewpager.transforms.CubeInTransformer;
-import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
-import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
-import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
-import com.ToxicBakery.viewpager.transforms.FlipHorizontalTransformer;
-import com.ToxicBakery.viewpager.transforms.FlipVerticalTransformer;
-import com.ToxicBakery.viewpager.transforms.ForegroundToBackgroundTransformer;
-import com.ToxicBakery.viewpager.transforms.RotateDownTransformer;
-import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
-import com.ToxicBakery.viewpager.transforms.ScaleInOutTransformer;
-import com.ToxicBakery.viewpager.transforms.StackTransformer;
-import com.ToxicBakery.viewpager.transforms.TabletTransformer;
-import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
-import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
-import com.ToxicBakery.viewpager.transforms.ZoomOutTranformer;
+import com.ToxicBakery.viewpager.transforms.TransformerType;
 
-public class MainActivity extends Activity implements OnNavigationListener {
+import java.util.ArrayList;
+
+public class MainActivity extends FragmentActivity
+		implements OnNavigationListener {
 
     private static final String KEY_SELECTED_PAGE = "KEY_SELECTED_PAGE";
     private static final String KEY_SELECTED_CLASS = "KEY_SELECTED_CLASS";
-    private static final ArrayList<TransformerItem> TRANSFORM_CLASSES;
-
-    static {
-        TRANSFORM_CLASSES = new ArrayList<>();
-        TRANSFORM_CLASSES.add(new TransformerItem(DefaultTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(AccordionTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(BackgroundToForegroundTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(CubeInTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(CubeOutTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(DepthPageTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(FlipHorizontalTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(FlipVerticalTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(ForegroundToBackgroundTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(RotateDownTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(RotateUpTransformer.class));
-	    TRANSFORM_CLASSES.add(new TransformerItem(ScaleInOutTransformer.class));
-	    TRANSFORM_CLASSES.add(new TransformerItem(StackTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(TabletTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(ZoomInTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(ZoomOutSlideTransformer.class));
-        TRANSFORM_CLASSES.add(new TransformerItem(ZoomOutTranformer.class));
-    }
 
     private int mSelectedItem;
     private ViewPager mPager;
-    private PageAdapter mAdapter;
+	private ArrayList<TransformerType> transformers;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -93,12 +55,12 @@ public class MainActivity extends Activity implements OnNavigationListener {
             selectedPage = savedInstanceState.getInt(KEY_SELECTED_PAGE);
         }
 
-        final ArrayAdapter<TransformerItem> actionBarAdapter = new ArrayAdapter<TransformerItem>(
-                getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, TRANSFORM_CLASSES);
+        final ArrayAdapter<TransformerType> actionBarAdapter = new ArrayAdapter<>(
+                getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, TransformerType.values());
 
         setContentView(R.layout.activity_main);
 
-        mAdapter = new PageAdapter(getFragmentManager());
+		PageAdapter mAdapter = new PageAdapter(getSupportFragmentManager());
 
         mPager = (ViewPager) findViewById(R.id.container);
         mPager.setAdapter(mAdapter);
@@ -114,18 +76,12 @@ public class MainActivity extends Activity implements OnNavigationListener {
 
             actionBar.setSelectedNavigationItem(mSelectedItem);
         }
-
     }
 
     @Override
     public boolean onNavigationItemSelected(int position, long itemId) {
         mSelectedItem = position;
-        try {
-            mPager.setPageTransformer(true, TRANSFORM_CLASSES.get(position).clazz.newInstance());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
+        mPager.setPageTransformer(true, TransformerType.values()[position].getTransformer());
         return true;
     }
 
@@ -174,22 +130,4 @@ public class MainActivity extends Activity implements OnNavigationListener {
         }
 
     }
-
-    private static final class TransformerItem {
-
-        final String title;
-        final Class<? extends PageTransformer> clazz;
-
-        public TransformerItem(Class<? extends PageTransformer> clazz) {
-            this.clazz = clazz;
-            title = clazz.getSimpleName();
-        }
-
-        @Override
-        public String toString() {
-            return title;
-        }
-
-    }
-
 }
