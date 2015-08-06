@@ -38,7 +38,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        minSdkVersion 13
+        minSdkVersion 11
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -57,7 +57,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v13:22.1.1'
+    compile 'com.android.support:support-v4:22.2.1'
 }
 
 apply from: '../maven_push.gradle'

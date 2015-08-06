@@ -48,6 +48,5 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v13:22.1.1'
     compile project(':library')
 }
