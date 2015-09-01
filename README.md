@@ -29,9 +29,9 @@ pager.setPageTransformer(true, new RotateUpTransformer());
 
 All ViewPagerTransform implementations extend [ABaseTransformer](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/library/src/main/java/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java) providing useful hooks improving readability of animations and basic functionality important when switching between animations. [ABaseTransformer](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/library/src/main/java/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java) provides three lifecycle hooks and two flags for default handling of hiding offscreen fragments and mimicking the default paging functionality of the ViewPager.
 
-* [preTransform(View view, float position)](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/library/src/main/java/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java#L85)
+* [onPreTransform(View view, float position)](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/library/src/main/java/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java#L85)
  * Default implementation resets the animation state of the fragment to defaults that will place it on the screen if its position permits.
 * [onTransform(View view, float position)](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/library/src/main/java/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java#L33)
  * Animations should perform all or most of their work inside this callback.
-* [postTransform(View view, float position)](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/library/src/main/java/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java#L116)
+* [onPostTransform(View view, float position)](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/library/src/main/java/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java#L116)
  * Default implementation does nothing. This provides a logical location for any additional work to be done that is not directly related to the animation.
