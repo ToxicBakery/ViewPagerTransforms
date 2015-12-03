@@ -28,12 +28,14 @@ public class ZoomOutSlideTransformer extends ABaseTransformer {
 		if (position >= -1 || position <= 1) {
 			// Modify the default slide transition to shrink the page as well
 			final float height = view.getHeight();
+			final float width = view.getWidth();
 			final float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
 			final float vertMargin = height * (1 - scaleFactor) / 2;
-			final float horzMargin = view.getWidth() * (1 - scaleFactor) / 2;
+			final float horzMargin = width * (1 - scaleFactor) / 2;
 
 			// Center vertically
 			view.setPivotY(0.5f * height);
+			view.setPivotX(0.5f * width);
 
 			if (position < 0) {
 				view.setTranslationX(horzMargin - vertMargin / 2);
