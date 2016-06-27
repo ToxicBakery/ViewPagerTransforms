@@ -17,9 +17,13 @@
 package com.ToxicBakery.viewpager.transforms;
 
 import android.support.v4.view.ViewPager.PageTransformer;
+import android.util.Log;
 import android.view.View;
 
 public abstract class ABaseTransformer implements PageTransformer {
+
+	private Float initialDiff = null;
+    private View bringToFrontView;
 
 	/**
 	 * Called each {@link #transformPage(android.view.View, float)}.
@@ -44,9 +48,15 @@ public abstract class ABaseTransformer implements PageTransformer {
 	 */
 	@Override
 	public void transformPage(View page, float position) {
-		onPreTransform(page, position);
-		onTransform(page, position);
-		onPostTransform(page, position);
+		float realPosition = onPreTransform(page, position);
+
+        if(Math.abs(realPosition) <= 0.2 && bringToFrontView != page) {
+            page.bringToFront();
+            bringToFrontView = page;
+        }
+
+        onTransform(page, realPosition);
+		onPostTransform(page, realPosition);
 	}
 
 	/**
@@ -82,8 +92,10 @@ public abstract class ABaseTransformer implements PageTransformer {
 	 *            Position of page relative to the current front-and-center position of the pager. 0 is front and
 	 *            center. 1 is one full page position to the right, and -1 is one page position to the left.
 	 */
-	protected void onPreTransform(View page, float position) {
+	protected float onPreTransform(View page, float position) {
 		final float width = page.getWidth();
+
+		if(initialDiff == null) initialDiff = position;
 
 		page.setRotationX(0);
 		page.setRotationY(0);
@@ -97,11 +109,12 @@ public abstract class ABaseTransformer implements PageTransformer {
 
 		if (hideOffscreenPages()) {
 			page.setAlpha(position <= -1f || position >= 1f ? 0f : 1f);
-			page.setEnabled(false);
+			page.setEnabled(!(position <= -1f || position >= 1f));
 		} else {
-			page.setEnabled(true);
 			page.setAlpha(1f);
 		}
+
+		return position - initialDiff;
 	}
 
 	/**
