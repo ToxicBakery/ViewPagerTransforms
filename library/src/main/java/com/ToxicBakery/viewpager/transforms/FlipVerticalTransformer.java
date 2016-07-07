@@ -30,4 +30,14 @@ public class FlipVerticalTransformer extends ABaseTransformer {
 		view.setRotationX(rotation);
 	}
 
+	@Override
+	protected void onPostTransform(View page, float position) {
+		super.onPostTransform(page, position);
+
+		if (position > -0.5f && position < 0.5f) {
+			page.setVisibility(View.VISIBLE);
+		} else {
+			page.setVisibility(View.INVISIBLE);
+		}
+	}
 }
