@@ -35,3 +35,12 @@ All ViewPagerTransform implementations extend [ABaseTransformer](https://github.
  * Animations should perform all or most of their work inside this callback.
 * [onPostTransform(View view, float position)](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/library/src/main/java/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java#L116)
  * Default implementation does nothing. This provides a logical location for any additional work to be done that is not directly related to the animation.
+
+## Building
+This project is built with Gradle using the Gradle Wrapper script.
+
+*Linux*  
+`./gradlew assembleDebug`
+
+*Windows*  
+`gradlew.bat assembleDebug`
