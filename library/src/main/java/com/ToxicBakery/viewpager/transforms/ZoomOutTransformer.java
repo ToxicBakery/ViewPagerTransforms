@@ -18,7 +18,7 @@ package com.ToxicBakery.viewpager.transforms;
 
 import android.view.View;
 
-public class ZoomOutTranformer extends ABaseTransformer {
+public class ZoomOutTransformer extends ABaseTransformer {
 
 	@Override
 	protected void onTransform(View view, float position) {
