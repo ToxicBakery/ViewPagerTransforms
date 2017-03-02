@@ -39,6 +39,7 @@ import com.ToxicBakery.viewpager.transforms.CubeInTransformer;
 import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
 import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
+import com.ToxicBakery.viewpager.transforms.DrawerTransformer;
 import com.ToxicBakery.viewpager.transforms.FlipHorizontalTransformer;
 import com.ToxicBakery.viewpager.transforms.FlipVerticalTransformer;
 import com.ToxicBakery.viewpager.transforms.ForegroundToBackgroundTransformer;
@@ -76,6 +77,7 @@ public class MainActivity extends Activity implements OnNavigationListener {
         TRANSFORM_CLASSES.add(new TransformerItem(ZoomInTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(ZoomOutSlideTransformer.class));
         TRANSFORM_CLASSES.add(new TransformerItem(ZoomOutTransformer.class));
+        TRANSFORM_CLASSES.add(new TransformerItem(DrawerTransformer.class));
     }
 
     private int mSelectedItem;
