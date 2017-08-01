@@ -9,7 +9,7 @@ Library containing common animations needed for transforming ViewPager scrolling
 
 ![Demo](http://i.imgur.com/rvhE2ns.gif)
 
-#Getting Started (Gradle / Android Studio)
+# Getting Started (Gradle / Android Studio)
 
 Add gradle dependency to your application.
 ```gradle
@@ -25,7 +25,7 @@ pager.setAdapter(mAdapter);
 pager.setPageTransformer(true, new RotateUpTransformer());
 ```
 
-#Creating Custom Transforms
+# Creating Custom Transforms
 
 All ViewPagerTransform implementations extend [ABaseTransformer](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/library/src/main/java/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java) providing useful hooks improving readability of animations and basic functionality important when switching between animations. [ABaseTransformer](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/library/src/main/java/com/ToxicBakery/viewpager/transforms/ABaseTransformer.java) provides three lifecycle hooks and two flags for default handling of hiding offscreen fragments and mimicking the default paging functionality of the ViewPager.
 
