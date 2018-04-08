@@ -44,27 +44,28 @@ public abstract class ABaseTransformer implements PageTransformer {
 	 */
 	@Override
 	public void transformPage(View page, float position) {
-		float flooredPosition = floorPosition(position);
+		float clampedPosition = clampPosition(position);
 
-		onPreTransform(page, flooredPosition);
-		onTransform(page, flooredPosition);
-		onPostTransform(page, flooredPosition);
+		onPreTransform(page, clampedPosition);
+		onTransform(page, clampedPosition);
+		onPostTransform(page, clampedPosition);
 	}
 
-    /**
-     * Floor the position. This step is required for some Android 4 devices.
-     * The position is dependant on the range of the ViewPager and whether it supports infinite scrolling in both directions.
-     * @param position Position of page relative to the current front-and-center position of the pager.
-     * @return A value between -1 and 1
-     */
-    private float floorPosition(float position) {
-        if (position < -1f) {
-            return -1f;
-        } else if (position > 1f) {
-            return 1f;
-        }
-        return position;
-    }
+	/**
+	 * Clamp the position. This step is required for some Android 4 devices.
+	 * The position is dependant on the range of the ViewPager and whether it supports infinite scrolling in both directions.
+	 *
+	 * @param position Position of page relative to the current front-and-center position of the pager.
+	 * @return A value between -1 and 1
+	 */
+	private float clampPosition(float position) {
+		if (position < -1f) {
+			return -1f;
+		} else if (position > 1f) {
+			return 1f;
+		}
+		return position;
+	}
 
 	/**
 	 * If the position offset of a fragment is less than negative one or greater than one, returning true will set the
