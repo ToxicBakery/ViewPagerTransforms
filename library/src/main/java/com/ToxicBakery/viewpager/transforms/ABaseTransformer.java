@@ -23,7 +23,7 @@ public abstract class ABaseTransformer implements PageTransformer {
 
 	/**
 	 * Called each {@link #transformPage(android.view.View, float)}.
-	 * 
+	 *
 	 * @param page
 	 *            Apply the transformation to this page
 	 * @param position
@@ -35,7 +35,7 @@ public abstract class ABaseTransformer implements PageTransformer {
 	/**
 	 * Apply a property transformation to the given page. For most use cases, this method should not be overridden.
 	 * Instead use {@link #transformPage(android.view.View, float)} to perform typical transformations.
-	 * 
+	 *
 	 * @param page
 	 *            Apply the transformation to this page
 	 * @param position
@@ -44,15 +44,33 @@ public abstract class ABaseTransformer implements PageTransformer {
 	 */
 	@Override
 	public void transformPage(View page, float position) {
-		onPreTransform(page, position);
-		onTransform(page, position);
-		onPostTransform(page, position);
+		float clampedPosition = clampPosition(position);
+
+		onPreTransform(page, clampedPosition);
+		onTransform(page, clampedPosition);
+		onPostTransform(page, clampedPosition);
+	}
+
+	/**
+	 * Clamp the position. This step is required for some Android 4 devices.
+	 * The position is dependant on the range of the ViewPager and whether it supports infinite scrolling in both directions.
+	 *
+	 * @param position Position of page relative to the current front-and-center position of the pager.
+	 * @return A value between -1 and 1
+	 */
+	private float clampPosition(float position) {
+		if (position < -1f) {
+			return -1f;
+		} else if (position > 1f) {
+			return 1f;
+		}
+		return position;
 	}
 
 	/**
 	 * If the position offset of a fragment is less than negative one or greater than one, returning true will set the
 	 * fragment alpha to 0f. Otherwise fragment alpha is always defaulted to 1f.
-	 * 
+	 *
 	 * @return
 	 */
 	protected boolean hideOffscreenPages() {
@@ -61,7 +79,7 @@ public abstract class ABaseTransformer implements PageTransformer {
 
 	/**
 	 * Indicates if the default animations of the view pager should be used.
-	 * 
+	 *
 	 * @return
 	 */
 	protected boolean isPagingEnabled() {
@@ -75,7 +93,7 @@ public abstract class ABaseTransformer implements PageTransformer {
 	 * not modify the same page properties. For instance changing from a transformation that applies rotation to a
 	 * transformation that fades can inadvertently leave a fragment stuck with a rotation or with some degree of applied
 	 * alpha.
-	 * 
+	 *
 	 * @param page
 	 *            Apply the transformation to this page
 	 * @param position
@@ -106,7 +124,7 @@ public abstract class ABaseTransformer implements PageTransformer {
 
 	/**
 	 * Called each {@link #transformPage(android.view.View, float)} after {@link #onTransform(android.view.View, float)}.
-	 * 
+	 *
 	 * @param page
 	 *            Apply the transformation to this page
 	 * @param position
@@ -118,7 +136,7 @@ public abstract class ABaseTransformer implements PageTransformer {
 
 	/**
 	 * Same as {@link Math#min(double, double)} without double casting, zero closest to infinity handling, or NaN support.
-	 * 
+	 *
 	 * @param val
 	 * @param min
 	 * @return
