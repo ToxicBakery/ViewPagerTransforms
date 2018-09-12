@@ -29,13 +29,13 @@ repositories {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "28.0.2"
 
     defaultConfig {
         applicationId "com.ToxicBakery.viewpager.transforms"
-        minSdkVersion 13
-        targetSdkVersion 23
+        minSdkVersion 14
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -48,6 +48,6 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v13:23.2.0'
-    compile project(':library')
+    implementation 'com.android.support:support-v13:27.1.1'
+    implementation project(':library')
 }
