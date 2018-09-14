@@ -20,8 +20,19 @@ import android.view.View;
 
 public class CubeOutTransformer extends ABaseTransformer {
 
+	private final int distanceMultiplier;
+
+	public CubeOutTransformer(int distanceMultiplier){
+		this.distanceMultiplier = distanceMultiplier;
+	}
+
+	public CubeOutTransformer(){
+		this(20);
+	}
+
 	@Override
 	protected void onTransform(View view, float position) {
+		view.setCameraDistance(view.getWidth() * distanceMultiplier);
 		view.setPivotX(position < 0f ? view.getWidth() : 0f);
 		view.setPivotY(view.getHeight() * 0.5f);
 		view.setRotationY(90f * position);
