@@ -1,49 +1,31 @@
-/*
- * Copyright 2014 Toxic Bakery
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-if (isReleaseBuild()) {
-    println 'RELEASE BUILD'
-} else {
-    println 'DEBUG BUILD'
-}
+static String getTagName() { return System.getenv('CIRCLE_TAG') ?: "" }
 
-def getRepositoryUsername() {
-    return System.getenv('sonatype_user') ?: hasProperty('sonatype_user') ? sonatype_user : ""
-}
+boolean isSnapshot() { return version.contains("SNAPSHOT") }
 
-def getRepositoryPassword() {
-    return System.getenv('sonatype_pass') ?: hasProperty('sonatype_pass') ? sonatype_pass : ""
-}
+static boolean isTag() { return !getTagName().isEmpty() }
 
-String getBranchName() {
-    return System.getenv('TRAVIS_BRANCH')
-}
+static boolean isCircle() { return System.getenv('CIRCLECI') ? true : false }
+
+static String getRepositoryUsername() { return System.getenv('SONATYPE_USERNAME') ?: "" }
+
+static String getRepositoryPassword() { return System.getenv('SONATYPE_PASSWORD') ?: "" }
+
+static String getBranchName() { return System.getenv('CIRCLE_BRANCH') }
+
+boolean isRelease() { return isTag() && !isSnapshot() }
 
 afterEvaluate { project ->
 
-    println "Is Tag ${isTag()}"
+    println "Tag ${getTagName()}"
     println "Branch ${getBranchName()}"
-    println "Is Release ${isReleaseBuild()}"
-    println "Is Travis ${isTravis()}"
+    println "Is Release ${isRelease()}"
+    println "Is Circle ${isCircle()}"
     println "Has Username ${!getRepositoryUsername().empty}"
     println "Has Password ${!getRepositoryPassword().empty}"
-    println "Determined Version ${version}"
+    println "Version ${version}"
 
     uploadArchives {
         repositories {
@@ -56,7 +38,7 @@ afterEvaluate { project ->
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
 
-                snapshotRepository(url: isTravis() ? "https://oss.sonatype.org/content/repositories/snapshots" : mavenLocal().url) {
+                snapshotRepository(url: isCircle() ? "https://oss.sonatype.org/content/repositories/snapshots" : mavenLocal().url) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
 
@@ -95,29 +77,8 @@ afterEvaluate { project ->
     }
 
     signing {
-        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+        required false
         sign configurations.archives
     }
 
-    task androidJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.java.sourceFiles
-    }
-
-    task androidJavadocsJar(type: Jar) {
-        classifier = 'javadoc'
-        //basename = artifact_id
-        from androidJavadocs.destinationDir
-    }
-
-    task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
-        //basename = artifact_id
-        from android.sourceSets.main.java.sourceFiles
-    }
-
-    artifacts {
-        //archives packageReleaseJar
-        archives androidSourcesJar
-        archives androidJavadocsJar
-    }
 }
