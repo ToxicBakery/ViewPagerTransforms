@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ToxicBakery/ViewPagerTransforms.svg)](https://travis-ci.org/ToxicBakery/ViewPagerTransforms)
+[![CircleCI](https://circleci.com/gh/ToxicBakery/ViewPagerTransforms.svg?style=svg)](https://circleci.com/gh/ToxicBakery/ViewPagerTransforms)
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ViewPagerTransforms-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1193)
 

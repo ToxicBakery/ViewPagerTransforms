@@ -1,0 +1,37 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: toxicbakery/alpine-glibc-android:release-1.2.0
+  environment:
+    TERM: dumb
+
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Execute Gradle
+          command: |
+            echo "org.gradle.parallel=false" >> gradle.properties
+            echo "kotlin.incremental=false" >> gradle.properties
+            ./gradlew build --no-daemon -PdisablePreDex
+            bash <(curl -s https://codecov.io/bash)
+            if [ "master" = "$CIRCLE_BRANCH" ] || [ ! -z "$CIRCLE_TAG" ]; then
+              echo "signing.keyId=${SIGNING_KEY}" >> "gradle.properties"
+              echo "signing.password=${SIGNING_PASSWORD}" >> "gradle.properties"
+              echo "signing.secretKeyRingFile=../maven.keystore" >> "gradle.properties"
+              gpg --cipher-algo AES256 --yes --batch --passphrase=$ENC_FILE_KEY maven.keystore.gpg
+              ./gradlew uploadArchives --no-daemon -PdisablePreDex
+            fi
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          context: Sonatype
+          filters:
+            tags:
+              only: /.*/
+
