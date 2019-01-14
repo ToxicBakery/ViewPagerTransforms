@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-package com.ToxicBakery.viewpager.transforms;
+package com.ToxicBakery.viewpager.transforms
 
-import android.view.View;
+import android.view.View
 
-public class BackgroundToForegroundTransformer extends ABaseTransformer {
+open class ZoomOutTransformer : ABaseTransformer() {
 
-	@Override
-	protected void onTransform(View view, float position) {
-		final float height = view.getHeight();
-		final float width = view.getWidth();
-		final float scale = min(position < 0 ? 1f : Math.abs(1f - position), 0.5f);
-
-		view.setScaleX(scale);
-		view.setScaleY(scale);
-		view.setPivotX(width * 0.5f);
-		view.setPivotY(height * 0.5f);
-		view.setTranslationX(position < 0 ? width * position : -width * position * 0.25f);
-	}
+    override fun onTransform(page: View, position: Float) {
+        val scale = 1f + Math.abs(position)
+        page.scaleX = scale
+        page.scaleY = scale
+        page.pivotX = page.width * 0.5f
+        page.pivotY = page.height * 0.5f
+        page.alpha = if (position < -1f || position > 1f) 0f else 1f - (scale - 1f)
+        if (position == -1f) page.translationX = (page.width * -1).toFloat()
+    }
 
 }

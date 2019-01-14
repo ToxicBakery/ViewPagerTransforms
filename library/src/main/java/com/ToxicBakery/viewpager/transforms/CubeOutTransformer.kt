@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-package com.ToxicBakery.viewpager.transforms;
+package com.ToxicBakery.viewpager.transforms
 
-import android.view.View;
+import android.view.View
 
-public class ZoomInTransformer extends ABaseTransformer {
+open class CubeOutTransformer @JvmOverloads constructor(
+        private val distanceMultiplier: Int = 20
+) : ABaseTransformer() {
 
-	@Override
-	protected void onTransform(View view, float position) {
-		final float scale = position < 0 ? position + 1f : Math.abs(1f - position);
-		view.setScaleX(scale);
-		view.setScaleY(scale);
-		view.setPivotX(view.getWidth() * 0.5f);
-		view.setPivotY(view.getHeight() * 0.5f);
-		view.setAlpha(position < -1f || position > 1f ? 0f : 1f - (scale - 1f));
-	}
+    public override val isPagingEnabled: Boolean
+        get() = true
+
+    override fun onTransform(page: View, position: Float) {
+        page.cameraDistance = (page.width * distanceMultiplier).toFloat()
+        page.pivotX = if (position < 0f) page.width.toFloat() else 0f
+        page.pivotY = page.height * 0.5f
+        page.rotationY = 90f * position
+    }
 
 }

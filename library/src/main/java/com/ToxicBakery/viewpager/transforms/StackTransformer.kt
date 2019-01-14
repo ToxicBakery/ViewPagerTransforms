@@ -14,28 +14,14 @@
  * limitations under the License.
  */
 
-package com.ToxicBakery.viewpager.transforms;
+package com.ToxicBakery.viewpager.transforms
 
-import android.view.View;
+import android.view.View
 
-public class RotateUpTransformer extends ABaseTransformer {
+open class StackTransformer : ABaseTransformer() {
 
-	private static final float ROT_MOD = -15f;
-
-	@Override
-	protected void onTransform(View view, float position) {
-		final float width = view.getWidth();
-		final float rotation = ROT_MOD * position;
-
-		view.setPivotX(width * 0.5f);
-		view.setPivotY(0f);
-		view.setTranslationX(0f);
-		view.setRotation(rotation);
-	}
-	
-	@Override
-	protected boolean isPagingEnabled() {
-		return true;
-	}
+    override fun onTransform(page: View, position: Float) {
+        page.translationX = if (position < 0) 0f else -page.width * position
+    }
 
 }

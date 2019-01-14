@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-package transforms.viewpager.toxicbakery.com.viewpagertransforms;
+package com.ToxicBakery.viewpager.transforms
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
+import android.view.View
 
-/**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
- */
-public class ApplicationTest extends ApplicationTestCase<Application> {
-    public ApplicationTest() {
-        super(Application.class);
+open class ZoomInTransformer : ABaseTransformer() {
+
+    override fun onTransform(page: View, position: Float) {
+        val scale = if (position < 0) position + 1f else Math.abs(1f - position)
+        page.scaleX = scale
+        page.scaleY = scale
+        page.pivotX = page.width * 0.5f
+        page.pivotY = page.height * 0.5f
+        page.alpha = if (position < -1f || position > 1f) 0f else 1f - (scale - 1f)
     }
+
 }
