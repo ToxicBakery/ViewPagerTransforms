@@ -61,18 +61,3 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-allprojects {
-    String tagName = System.getenv('CIRCLE_TAG')
-    boolean isTag = tagName != null && !tagName.isEmpty()
-    String buildNumber = System.getenv('CIRCLE_BUILD_NUM') ?: "0"
-
-    group 'com.ToxicBakery.viewpager.transforms'
-    version "1.3.${buildNumber}" + (isTag ? "" : "-SNAPSHOT")
-
-    repositories {
-        jcenter()
-        google()
-    }
-}
-
