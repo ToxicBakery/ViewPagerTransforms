@@ -40,13 +40,13 @@ jobs:
             if [ -z "$CIRCLE_PR_REPONAME" ] && [ "master" = "$CIRCLE_BRANCH" ]; then
               git config --global user.email $GH_EMAIL
               git config --global user.name $GH_NAME
-              cp -r .circleci rajawali/build/gh-pages/.circleci
-              cd rajawali/build/gh-pages
+              cp -r .circleci library/build/gh-pages/.circleci
+              cd library/build/gh-pages
               git init
               git checkout --orphan gh-pages
               git add -A
               git commit -m "Automated deployment of ${CIRCLE_BRANCH} ${CIRCLE_SHA1}" --allow-empty
-              git push -q https://${GH_PERSONAL_TOKEN}@github.com/Rajawali/${CIRCLE_PROJECT_REPONAME}.git gh-pages --force
+              git push -q https://${GH_PERSONAL_TOKEN}@github.com/ToxicBakery/${CIRCLE_PROJECT_REPONAME}.git gh-pages --force
             fi
 
 workflows:
