@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/ToxicBakery/ViewPagerTransforms.svg?style=svg)](https://circleci.com/gh/ToxicBakery/ViewPagerTransforms)
-
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ViewPagerTransforms-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1193)
+[![License](https://img.shields.io/badge/license-Apache%202.0%20License-blue.svg)](https://github.com/ToxicBakery/ViewPagerTransforms/blob/master/LICENSE)
+[![Maven Central](https://img.shields.io/maven-metadata/v/https/oss.sonatype.org/content/repositories/releases/com/ToxicBakery/viewpager/transforms/view-pager-transforms/maven-metadata.xml.svg)](https://oss.sonatype.org/content/repositories/releases/com/ToxicBakery/viewpager/transforms/view-pager-transforms)
 
 ViewPagerTransforms
 ===================
