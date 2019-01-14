@@ -14,19 +14,27 @@
  * limitations under the License.
  */
 
-package com.ToxicBakery.viewpager.transforms;
+package com.ToxicBakery.viewpager.transforms
 
-import android.view.View;
+import android.view.View
 
-public class DefaultTransformer extends ABaseTransformer {
+open class RotateUpTransformer : ABaseTransformer() {
 
-	@Override
-	protected void onTransform(View view, float position) {
-	}
+    override val isPagingEnabled: Boolean
+        get() = true
 
-	@Override
-	public boolean isPagingEnabled() {
-		return true;
-	}
+    override fun onTransform(page: View, position: Float) {
+        val width = page.width.toFloat()
+        val rotation = ROT_MOD * position
+
+        page.pivotX = width * 0.5f
+        page.pivotY = 0f
+        page.translationX = 0f
+        page.rotation = rotation
+    }
+
+    companion object {
+        private const val ROT_MOD = -15f
+    }
 
 }

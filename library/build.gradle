@@ -14,18 +14,12 @@
  * limitations under the License.
  */
 
+plugins {
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC12")
+}
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'org.jetbrains.dokka-android'
-apply plugin: 'jacoco'
-
-jacoco {
-    toolVersion = '0.8.0'
-}
-
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-}
 
 repositories {
     google()
@@ -34,13 +28,15 @@ repositories {
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion = "27.0.3"
+    compileSdkVersion android_target_sdk
+    buildToolsVersion = android_build_tools_version
+
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion android_target_sdk
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         debug {
             testCoverageEnabled true
@@ -50,87 +46,44 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    testOptions {
+        animationsDisabled true
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
+    }
+
+    dexOptions {
+        // Skip pre-dexing when running on CI
+        preDexLibraries = !isCi
+        javaMaxHeapSize maxDexHeap
+    }
 }
 
 dependencies {
-    implementation 'com.android.support:support-v13:27.1.1'
+    implementation "com.android.support:support-v4:$android_support_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
-dokka {
-    noStdlibLink = false
-    includeNonPublic = false
-    skipEmptyPackages = true
-    outputFormat = 'html'
-    outputDirectory = "$buildDir/javadoc"
-}
-
-afterEvaluate { project ->
-    task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaAndroidTask) {
-        outputFormat = 'javadoc'
-        outputDirectory = "$buildDir/javadoc"
-        inputs.dir 'src/main/java'
-    }
-
-    task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
-        classifier = 'javadoc'
-        from "$buildDir/javadoc"
-    }
-
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.srcDirs
-    }
-
-    artifacts {
-        archives sourcesJar
-        archives javadocJar
-    }
-}
-
-task jacocoUnitTestReport(type: JacocoReport, group: 'verification', dependsOn: ['testDebugUnitTest']) {
+detekt {
+    input = files("src/main/java")
+    config = files("$projectDir/detekt.yml")
+    parallel = true
     reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
-    def debugTree = fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
-    def mainSrc = "$project.projectDir/src/main/java"
-
-    sourceDirectories = files([mainSrc])
-    classDirectories = files([debugTree])
-    executionData = fileTree(dir: project.buildDir, includes: [
-            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'
-    ])
-}
-
-task jacocoFullTestReport(type: JacocoReport, group: 'verification', dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
-    def debugTree = fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
-    def mainSrc = "$project.projectDir/src/main/java"
-
-    sourceDirectories = files([mainSrc])
-    classDirectories = files([debugTree])
-    executionData = fileTree(dir: project.buildDir, includes: [
-            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'
-    ])
-}
-
-task copyAndroidCoverage(type: Copy) {
-    /*afterEvaluate {
-        dependsOn jacocoFullTestReport
-    }*/
-    from 'build/reports/jacoco/jacocoFullTestReport/jacocoFullTestReport.xml'
-    into './'
-    rename { String fileName ->
-        fileName = "integration.xml"
+        xml.enabled = false
+        html {
+            enabled = true
+            destination = file("build/reports/detekt/detekt.html")
+        }
     }
 }
+check.dependsOn('detekt')
 
 apply from: "${rootDir}/publish.gradle"
 
