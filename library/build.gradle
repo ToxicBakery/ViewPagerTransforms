@@ -95,3 +95,12 @@ task dokkaGhPages(type: org.jetbrains.dokka.gradle.DokkaAndroidTask) {
     skipDeprecated = false
     noStdlibLink = false
 }
+
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaAndroidTask) {
+    outputFormat = 'javadoc'
+    outputDirectory = "$buildDir/javadoc"
+    sourceDirs = files('src/main/java')
+    skipEmptyPackages = true
+    skipDeprecated = false
+    noStdlibLink = false
+}

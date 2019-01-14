@@ -1,4 +1,4 @@
-apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'org.jetbrains.dokka-android'
 apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: 'signing'
 apply plugin: 'jacoco'
@@ -37,7 +37,7 @@ task jacocoTestReport(type: JacocoReport) {
     executionData = files([ecSrc, execSrc])
 }
 
-task dokka(overwrite: true, type: org.jetbrains.dokka.gradle.DokkaAndroidTask) {
+dokka {
     outputFormat = 'javadoc'
     outputDirectory = "$buildDir/javadoc"
     sourceDirs = files('src/main/java')
