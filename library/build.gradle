@@ -87,8 +87,11 @@ check.dependsOn('detekt')
 
 apply from: "${rootDir}/publish.gradle"
 
-task dokkaGhPages(type: org.jetbrains.dokka.gradle.DokkaTask) {
+task dokkaGhPages(type: org.jetbrains.dokka.gradle.DokkaAndroidTask) {
     outputFormat = 'html'
     outputDirectory = "$buildDir/gh-pages"
     sourceDirs = files('src/main/java')
+    skipEmptyPackages = true
+    skipDeprecated = false
+    noStdlibLink = false
 }

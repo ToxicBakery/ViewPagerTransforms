@@ -37,10 +37,13 @@ task jacocoTestReport(type: JacocoReport) {
     executionData = files([ecSrc, execSrc])
 }
 
-dokka {
-    outputFormat = 'html'
+task dokka(overwrite: true, type: org.jetbrains.dokka.gradle.DokkaAndroidTask) {
+    outputFormat = 'javadoc'
     outputDirectory = "$buildDir/javadoc"
     sourceDirs = files('src/main/java')
+    skipEmptyPackages = true
+    skipDeprecated = false
+    noStdlibLink = false
 }
 
 task dokkaJar(type: Jar, dependsOn: dokka) {
