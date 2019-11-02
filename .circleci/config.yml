@@ -1,0 +1,64 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: toxicbakery/alpine-glibc-android:release-1.3.4
+  environment:
+    TERM: dumb
+
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Execute Gradle
+          command: |
+            echo "org.gradle.parallel=false" >> gradle.properties
+            echo "org.gradle.daemon=false" >> gradle.properties
+            echo "org.gradle.jvmargs=-Xmx3g -XX:MaxPermSize=2048m -Dfile.encoding=UTF-8" >> gradle.properties
+
+            # Only deploy master and tags, only tags are pushed as releases to OSS. Forks never attempt deploy
+            if [ -z "$CIRCLE_PR_REPONAME" ] && { [ "master" = "$CIRCLE_BRANCH" ] || [ ! -z "$CIRCLE_TAG" ]; }; then
+              echo "signing.keyId=${SIGNING_KEY}" >> "gradle.properties"
+              echo "signing.password=${SIGNING_PASSWORD}" >> "gradle.properties"
+              echo "signing.secretKeyRingFile=../maven.keystore" >> "gradle.properties"
+              gpg --cipher-algo AES256 --yes --batch --passphrase=$ENC_FILE_KEY maven.keystore.gpg
+              # Build and deploy
+              ./gradlew build dokkaGhPages publish
+            else
+              # Regular Build
+              ./gradlew build
+            fi
+
+            # Codecov report for non forked work
+            if [ -z "$CIRCLE_PR_REPONAME" ]; then
+              bash <(curl -s https://codecov.io/bash)
+            fi
+
+            # Github Pages for master non forked work
+            if [ -z "$CIRCLE_PR_REPONAME" ] && [ "master" = "$CIRCLE_BRANCH" ]; then
+              git config --global user.email $GH_EMAIL
+              git config --global user.name $GH_NAME
+              cp -r .circleci library/build/gh-pages/.circleci
+              cd library/build/gh-pages
+              git init
+              git checkout --orphan gh-pages
+              git add -A
+              git commit -m "Automated deployment of ${CIRCLE_BRANCH} ${CIRCLE_SHA1}" --allow-empty
+              git push -q https://${GH_PERSONAL_TOKEN}@github.com/ToxicBakery/${CIRCLE_PROJECT_REPONAME}.git gh-pages --force
+            fi
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          context: Sonatype
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore:
+                - gh-pages
+

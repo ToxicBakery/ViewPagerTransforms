@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ScaleInOutTransformer - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.ToxicBakery.viewpager.transforms</a>&nbsp;/&nbsp;<a href="./index.html">ScaleInOutTransformer</a><br/>
+<br/>
+<h1>ScaleInOutTransformer</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">ScaleInOutTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-a-base-transformer/index.html"><span class="identifier">ABaseTransformer</span></a></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ScaleInOutTransformer</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-a-base-transformer/is-paging-enabled.html">isPagingEnabled</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">isPagingEnabled</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Indicates if the default animations of the view pager should be used.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="on-transform.html">onTransform</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onTransform</span><span class="symbol">(</span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ScaleInOutTransformer$onTransform(android.view.View, kotlin.Float)/page">page</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ScaleInOutTransformer$onTransform(android.view.View, kotlin.Float)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called each <a href="#">.transformPage</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-a-base-transformer/hide-offscreen-pages.html">hideOffscreenPages</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">hideOffscreenPages</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>If the position offset of a fragment is less than negative one or greater than one, returning true will set the
+fragment alpha to 0f. Otherwise fragment alpha is always defaulted to 1f.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-a-base-transformer/on-post-transform.html">onPostTransform</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onPostTransform</span><span class="symbol">(</span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$onPostTransform(android.view.View, kotlin.Float)/page">page</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$onPostTransform(android.view.View, kotlin.Float)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called each <a href="#">.transformPage</a> after <a href="#">.onTransform</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-a-base-transformer/on-pre-transform.html">onPreTransform</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onPreTransform</span><span class="symbol">(</span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$onPreTransform(android.view.View, kotlin.Float)/page">page</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$onPreTransform(android.view.View, kotlin.Float)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called each <a href="#">.transformPage</a> before {<a href="#">.onTransform</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-a-base-transformer/transform-page.html">transformPage</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">transformPage</span><span class="symbol">(</span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$transformPage(android.view.View, kotlin.Float)/page">page</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$transformPage(android.view.View, kotlin.Float)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Apply a property transformation to the given page. For most use cases, this method should not be overridden.
+Instead use <a href="#">.transformPage</a> to perform typical transformations.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

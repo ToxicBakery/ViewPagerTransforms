@@ -1,0 +1,238 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ABaseTransformer - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.ToxicBakery.viewpager.transforms</a>&nbsp;/&nbsp;<a href="./index.html">ABaseTransformer</a><br/>
+<br/>
+<h1>ABaseTransformer</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">ABaseTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">PageTransformer</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ABaseTransformer</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="is-paging-enabled.html">isPagingEnabled</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">isPagingEnabled</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Indicates if the default animations of the view pager should be used.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="hide-offscreen-pages.html">hideOffscreenPages</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">hideOffscreenPages</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>If the position offset of a fragment is less than negative one or greater than one, returning true will set the
+fragment alpha to 0f. Otherwise fragment alpha is always defaulted to 1f.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-post-transform.html">onPostTransform</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onPostTransform</span><span class="symbol">(</span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$onPostTransform(android.view.View, kotlin.Float)/page">page</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$onPostTransform(android.view.View, kotlin.Float)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called each <a href="#">.transformPage</a> after <a href="#">.onTransform</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-pre-transform.html">onPreTransform</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onPreTransform</span><span class="symbol">(</span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$onPreTransform(android.view.View, kotlin.Float)/page">page</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$onPreTransform(android.view.View, kotlin.Float)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called each <a href="#">.transformPage</a> before {<a href="#">.onTransform</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-transform.html">onTransform</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onTransform</span><span class="symbol">(</span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$onTransform(android.view.View, kotlin.Float)/page">page</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$onTransform(android.view.View, kotlin.Float)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Called each <a href="#">.transformPage</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="transform-page.html">transformPage</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">transformPage</span><span class="symbol">(</span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$transformPage(android.view.View, kotlin.Float)/page">page</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer$transformPage(android.view.View, kotlin.Float)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Apply a property transformation to the given page. For most use cases, this method should not be overridden.
+Instead use <a href="#">.transformPage</a> to perform typical transformations.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="min.html">min</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">min</span><span class="symbol">(</span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer.Companion$min(kotlin.Float, kotlin.Float)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">, </span><span class="identifier" id="com.ToxicBakery.viewpager.transforms.ABaseTransformer.Companion$min(kotlin.Float, kotlin.Float)/min">min</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a></code>
+<p>Same as <a href="https://developer.android.com/reference/java/lang/Math.html#min(int, int)">Math.min</a> without double casting, zero closest to infinity handling, or NaN support.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-accordion-transformer/index.html">AccordionTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">AccordionTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-background-to-foreground-transformer/index.html">BackgroundToForegroundTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">BackgroundToForegroundTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-cube-in-transformer/index.html">CubeInTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">CubeInTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-cube-out-transformer/index.html">CubeOutTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">CubeOutTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-default-transformer/index.html">DefaultTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">DefaultTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-depth-page-transformer/index.html">DepthPageTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">DepthPageTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-drawer-transformer/index.html">DrawerTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">DrawerTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code>
+<p>Created by dkzwm on 2017/3/2.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-flip-horizontal-transformer/index.html">FlipHorizontalTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">FlipHorizontalTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-flip-vertical-transformer/index.html">FlipVerticalTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">FlipVerticalTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-foreground-to-background-transformer/index.html">ForegroundToBackgroundTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">ForegroundToBackgroundTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-rotate-down-transformer/index.html">RotateDownTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">RotateDownTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-rotate-up-transformer/index.html">RotateUpTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">RotateUpTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-scale-in-out-transformer/index.html">ScaleInOutTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">ScaleInOutTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-stack-transformer/index.html">StackTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">StackTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-tablet-transformer/index.html">TabletTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">TabletTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-zoom-in-transformer/index.html">ZoomInTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">ZoomInTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-zoom-out-slide-transformer/index.html">ZoomOutSlideTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">ZoomOutSlideTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../-zoom-out-transformer/index.html">ZoomOutTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">ZoomOutTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ABaseTransformer</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
