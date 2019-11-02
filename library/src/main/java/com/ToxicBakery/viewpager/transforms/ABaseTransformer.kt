@@ -63,6 +63,8 @@ abstract class ABaseTransformer : PageTransformer {
      * The position is dependant on the range of the ViewPager and whether it supports infinite scrolling in both
      * directions.
      *
+     * On some devices it returns the position as NaN, so we set 0 as the fallback value
+     *
      * @param position Position of page relative to the current front-and-center position of the pager.
      * @return A value between -1 and 1
      */
@@ -70,6 +72,7 @@ abstract class ABaseTransformer : PageTransformer {
         return when {
             position < -1f -> -1f
             position > 1f -> 1f
+            position.isNaN() -> 0f
             else -> position
         }
     }
